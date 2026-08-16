@@ -110,7 +110,7 @@ func (s *Service) runUpload(ctx context.Context, cancel context.CancelFunc, task
 			s.store.rejectRecord(taskID, record.ID)
 			s.store.appendLog(taskID, s.clock.Now(), LogError, record.ID, fmt.Sprintf("submission rejected: %v", err))
 			cancel()
-			continue
+			break
 		}
 		s.store.submitRecord(taskID, record.ID)
 		s.store.appendLog(taskID, s.clock.Now(), LogInfo, record.ID, "submission accepted")
